@@ -14,12 +14,7 @@ addpath('ximu_matlab_library');
 % startTime = 0;
 % stopTime = 12;
 
-% % test data taken from online resources
-filePath = 'Datasets/spiralStairsAndCorridor';
-startTime = 4;
-stopTime = 47;
-
-% Import dataw
+% Import data
 samplePeriod = 1/256;
 
 xIMUdata = xIMUdataClass(filePath, 'InertialMagneticSampleRate', 1/samplePeriod);
