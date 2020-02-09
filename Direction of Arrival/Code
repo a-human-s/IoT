@@ -1,0 +1,87 @@
+% Author - Himanshu Singhal
+
+%% Task 3 - DIRECTION OF ARRIVAL
+
+clc;
+clear all;
+close all;
+
+%a)plot the real and imaginary part
+data = csvread('4.csv');
+r = real(data);
+I = imag(data);
+t = linspace(0,100,100);
+
+figure(1);
+subplot(2,1,1);         
+plot(t,r);                      %Plot the Real part
+xlabel('Element Index');
+ylabel('Amplitude');
+title('Real values of the array snapshot');
+subplot(2,1,2);
+plot(t,I);                      %Plot the Imaginary part
+xlabel('Element Index');
+ylabel('Amplitude');
+title('Imaginary values of the array snapshot');
+
+%b)FFT to find DOA
+%find DOA using FFT
+f=2000; %Hz
+c=340;  %m/s
+l=c/f;           %Incoming Signal Wavelength in (m).
+d=l/2;      
+N= 100;          %number of elements in array
+n= (1:N).';   %ULA
+%change the phi as per the source angle
+phi= 0; %source DOA
+%phi = -pi:pi/180:pi;
+%s= exp(1j*2*pi*n*d*sin(phi)); %signal
+s=data;
+% 1) FFT
+figure(2);
+K= 100;                          %fft length
+%S1= abs(fftshift(fft(s,K))).^2;  %beamformed spectrum
+S1 = abs(fft(s));
+plot(S1/max(S1));                %plot normalized spectrum
+xlabel('Array index');
+ylabel('Gain');
+title('Plot to find the index with maximum gain');
+
+% 2) "array pattern" 
+phi_search= -pi:pi/180:pi; %DOAs to search
+S2= zeros(1,length(phi_search)); %preallocate array pattern
+for i=1:length(phi_search)
+    v= exp(1j*2*pi*d*n*sin(phi_search(i))/l); %steering vector
+    S2(i)= abs(s*v);                       %spectrum
+end
+figure(3);
+plot(S2/max(S2)); 
+xlabel('Angle (0:2pi)');
+ylabel('Gain');
+title('FFT to find DOA for 100 elements');
+
+%c) Delay-Sum to find DOA
+phi_ds = 63;
+N_fft = 1024;
+C1 = zeros(length(N),N_fft);
+% Define the angle grid.
+angle = -90:180/N_fft:90-1/N_fft;  % Create N_fft angle samples between -90 to 90 deg.
+
+for m=1:length(N)
+    u_s = (d/l)*sin(phi_ds*pi/180);
+    c_mf = exp(1i*2*pi*u_s*(0:N(m)-1).')/sqrt(N(m));
+    for k=1:N_fft
+        u = (d/l)*sin(angle(k)*pi/180);
+        v = exp(1i*2*pi*u*(0:N(m)-1)')/sqrt(N(m)); % Azimuth Scanning Steering Vector.
+        C1(m,k)= c_mf'*v;
+    end
+end
+
+figure(4);
+plot(angle,10*log10(abs(C1(1,:)).^2),'b')
+title('Delay-Sum to find DOA for 100 elements');
+xlabel('Angle (deg)');
+ylabel('Power (dB)');
+xlim([-90 90]);
+ylim([-45 5]);
+grid on;
