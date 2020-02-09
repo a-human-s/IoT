@@ -1,0 +1,24 @@
+Task 1: Warming-up
+
+Read the sound file and plot the signal.
+(a) Read the sound signal with your program and store it in a variable. Find out the sample rate of the
+recording. Play the file using an audio player and listen to the sound. 
+(b) Plot the time domain signal. The vertical axis should show the amplitude and horizontal axis should
+show time (NOT the sample numbers). Use proper labels and units for the axes.
+(c) Plot the STFT or the spectrogram of the signal using a standard library function. For Matlab, you
+can use the ‘spectrogram’ function. 
+
+
+Task 2: Home-grown STFT
+
+Plot STFT of the signal using your own DFT matrix. You can not use standard function to generate the
+DFT matrix for this task. 
+(a) Create a 1024 point DFT matrix. Plot the real and imaginary components of that matrix in two
+separate 2-dimension image plots.
+(b) Use your DFT matrix to find the Short-time Fourier Transform (STFT) of the signal. Here the timewindow
+(or FFT-points, same as the number of rows/columns of the DFT matrix) should be 1024
+and the time-windows should not have any overlap between them. Plot the STFT as a 2-dimensional
+plot. The vertical axis should show frequency and horizontal axis should show time. Use proper tick
+values and labels for the axes.
+(c) Get the same STFT as in the previous question but using exactly one matrix multiplication. Plot the
+real part of the matrix you used.
