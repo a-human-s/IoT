@@ -1,0 +1,18 @@
+Consider a ULA of microphones (sound sensors) with 10 elements for the target frequency 2kHz. The
+ULA has the inter-element distance equal to the half of the wavelength of the target signal. Speed of
+sound is 340 m/s.
+
+(a) The samples of the incoming signal from all the elements of the array at a given instance of time is provided. 
+The data is in form of a complex vector. Plot the real and imaginary values of the array snapshot. The x-axis of the 
+plot should be properly labeled with the element index. You can use ‘csvread’ Matlab function to read the array 
+snapshot as a complex vector.
+
+(b) Use the Fast Fourier Transform to find the direction of arrival (DoA) of the signal from the array
+snapshot. (a) Report the DoA in degrees. (b) Plot the angular spectrum with x-axis properly labeled
+with possible directions of arrival in degrees. The plot should show a clear peak at the estimated
+DoA.
+
+(c) Use the Delay-Sum method to find the direction of arrival (DoA) of the signal from the array snapshot.
+(a) Report the DoA in degrees. (b) Plot the angular spectrum with x-axis properly labeled with
+possible directions of arrival in degrees. The plot should show a clear peak at the estimated DoA.
+(c) Submit your codes. 
