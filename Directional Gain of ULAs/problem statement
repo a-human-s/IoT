@@ -1,0 +1,11 @@
+Consider a Uniform Linear Array (ULA) of microphones (sound sensors). Each microphone is omnidirectional
+and identical, unless mentioned otherwise. Speed of sound is 340 m/s.
+
+(a) Write a program to plot the directional gain of a 10-element ULA for the target frequency 2kHz. The
+ULA has the inter-element distance equal to the half of the wavelength of the target signal. Submit
+your code and plot. 
+(b) Write a program and plot the directional gain of a 10-element ULA for the target frequency 2kHz.
+The ULA has the inter-element distance equal to the twice of the wavelength of the target signal.
+Submit your code and plot. 
+(c) Point out the differences in the directional gains of the above two configurations of the array and
+explain the reasons for the differences. 
