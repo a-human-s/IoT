@@ -1,0 +1,61 @@
+% Author - Himanshu Singhal
+
+%% TASK 2 - DIRECTIONAL GAIN OF ULAs
+
+clc;
+clear all;
+close all;
+
+%a) inter-element distance equal to half of the wavelength
+%Define all the parameters
+f=2000; %Hz
+c=340;  %m/s
+l=c/f;  %m
+d_a=l/2;
+d_b=2*l;
+n=10;
+theta=-pi:pi/180:pi;
+r_a=zeros(1,length(theta));
+r_b=zeros(1,length(theta));
+
+%Run a for loop 10 times for d = l/2
+for m=1:n
+  dx(m,:)=(m-1)*d_a*sin(theta);
+  r_a=r_a+exp(1i*2*pi*(dx(m,:)/l));
+end
+
+%Run a for loop 10 times for d = 2*l
+for m=1:n
+  dx_new(m,:)=(m-1)*d_b*sin(theta);
+  r_b=r_b+exp(1i*2*pi*(dx_new(m,:)/l));
+end
+
+%plot the directional gain of the ULAs
+figure(1);
+polar(theta,abs(r_a),'b')
+title ('Gain of a Uniform Linear Array for d = lambda/2')
+figure(2)
+polar(theta,abs(r_b),'r')
+title ('Gain of a Uniform Linear Array for d = 2*lambda')
+
+%% Without for loop
+% clear all
+% close all
+% 
+% f=2e3;
+% c=340;
+% l=c/f;
+% d=l/2;
+% no_elements=10;
+% 
+% theta=0:pi/180:2*pi;
+% n=1:no_elements;
+% n=transpose(n);
+% 
+% A=(n-1)*(1i*2*pi*d*sin(theta)/l);
+% X=exp(-A);
+% w=ones(1,no_elements);
+% r=w*X;
+% 
+% polar(theta,abs(r),'r')
+% title ('Gain of a Uniform Linear Array')
