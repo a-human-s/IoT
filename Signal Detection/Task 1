@@ -1,0 +1,52 @@
+% Author - Himanshu Singhal
+
+%% TASK 1 - SIGNAL DETECTION
+% Read the received and transmitted signal
+clc;
+clear all;
+close all;
+
+% Read the received signal and get sound data and the sampling frequency
+[y_r, Fs_r] = audioread('4.wav');
+
+% Read the transmitted signal and get sound data and the sampling frequency
+[y_t, Fs_t] = audioread('transmitSignal.wav');
+
+% wave contains the samples of the audio signal and the sampling frequency.
+% uncomment to play and check the correct fs
+% soundsc(y_r,Fs_r); 
+% soundsc(y_t,Fs_t);
+
+% Plotting the received signal
+figure(1);
+time_r=0:1/Fs_r:(length(y_r)-1)/Fs_r;
+subplot (2,1,1);
+plot(time_r, y_r); 
+title('Received Signal');
+xlabel('Time(s)'); 
+ylabel('Amplitude');
+axis([0 9.27764 -1 1])
+
+% Plotting the transmitted signal
+time_t=0:1/Fs_t:(length(y_t)-1)/Fs_t;
+subplot (2,1,2);
+plot(time_t,y_t);
+title('Transmitted Signal');
+xlabel('Time(s)'); 
+ylabel('Amplitude');
+axis([0 1.8545 -1 1])
+
+%Calculate the cross-correlation
+[C,lag] = xcorr(y_r,y_t);
+figure(2);
+plot(lag/Fs_r, C, 'r');
+ylabel('Amplitude');
+xlabel('Time(s)');
+title('Cross-correlation between signals');
+
+%Calculate the distance
+[~,I] = max(abs(C));
+SampleDiff = lag(I);
+timeDiff = SampleDiff/Fs_r;
+distance = timeDiff * 340;
+% The distance is 909.7656 meters.
