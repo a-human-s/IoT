@@ -1,0 +1,8 @@
+The speed of the signal is 340 m/s.
+
+(a)  Get time series of the transmitted/received signals from the file along with the sample rates.
+Plot the transmit and received signals. The x-axis of the plot should be properly labeled with time
+in seconds. 
+(b) Compute your distance from the base station using the transmitted and the received signals. Report
+the distance in meters.
+
